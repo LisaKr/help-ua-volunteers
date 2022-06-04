@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/help-ua-volunteers/static/css/main.e6c13ad2.css",
+    "main.js": "/help-ua-volunteers/static/js/main.77a7bb97.js",
+    "static/js/787.b8ada952.chunk.js": "/help-ua-volunteers/static/js/787.b8ada952.chunk.js",
+    "static/media/flag.png": "/help-ua-volunteers/static/media/flag.3f616bdeff0bdd8fe692.png",
+    "index.html": "/help-ua-volunteers/index.html",
+    "main.e6c13ad2.css.map": "/help-ua-volunteers/static/css/main.e6c13ad2.css.map",
+    "main.77a7bb97.js.map": "/help-ua-volunteers/static/js/main.77a7bb97.js.map",
+    "787.b8ada952.chunk.js.map": "/help-ua-volunteers/static/js/787.b8ada952.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.77a7bb97.js"
+  ]
+}
