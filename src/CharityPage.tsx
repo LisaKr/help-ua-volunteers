@@ -46,7 +46,7 @@ const CharityPage: React.FC = () => {
           <Description>
             Every day a wide variety of Ukrainian grassroots volunteers and established charity funds tirelessly help civilians, army, children and animals.
             They run on donation basis and -- I know you've heard it before, but it's true! -- even the price of a cup of coffee makes a difference.
-            All listed causes are manually picked and provide reports on their spendings (sometimes just in form of Instagram stories in Ukrainian tho!), however you are welcome to conduct your own research before donation.
+            All listed causes are manually picked and provide reports on their spendings (sometimes just in form of Instagram stories in Ukrainian tho!), however you are welcome to conduct your own research before donating.
           </Description>
           <Content>
             <div style={{width: "100%"}}>
