@@ -59,7 +59,7 @@ const CharityPage: React.FC = () => {
             </div>
             {result && (
               <ResultContainer ref={resultComp}>
-                <h4 style={{margin: 0}}>💙💛 Today's donation</h4>
+                <h4 style={{margin: 0}}>💙💛 Consider donating here</h4>
                 <ResultRow>ℹ️ {result.name}</ResultRow>
                 <ResultRow>❓ {result.description}</ResultRow>
                 <ResultRow>💡 <a href={result.link}> Learn more</a></ResultRow>

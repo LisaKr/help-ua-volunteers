@@ -1,7 +1,7 @@
 {
   "name": "charity",
   "version": "0.1.0",
-  "homepage": "https://lisakr.github.io/help-ua-volunteers",
+  "homepage": "https://www.help-ua-volunteers.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
