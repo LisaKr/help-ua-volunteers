@@ -165,6 +165,7 @@ const Content = styled.div`
 
   @media (min-width: 768px) {
     align-items: center;
+    min-width: 100%;
   }
 `
 
