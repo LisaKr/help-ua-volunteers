@@ -1,8 +1,8 @@
-import React, {useState, useRef} from "react"
+import React, {useState, useRef, useEffect} from "react"
 import styled, { createGlobalStyle } from 'styled-components'
 import Flag from './assets/flag.png';
-
 import ChoosingCard from "./subcomponents/ChoosingCard";
+
 import InfoModal from "./subcomponents/InfoModal";
 import { Charity, CharityCategory } from "./types";
 import { getRandomCharity } from "./util/util";
@@ -20,19 +20,32 @@ const GlobalStyle = createGlobalStyle`
 
 
 const CharityPage: React.FC = () => {
+  const CATEGORIES = [CharityCategory.animals, CharityCategory.military, CharityCategory.humanitarian, CharityCategory.mixed]
   const [result, setResult] = useState<null | Charity>(null) 
   const [modalIsOpen, setIsOpen] = useState<boolean>(false)
 
   const resultComp = useRef(null)
 
   const handleSelect = async (name: CharityCategory) => {
-    await setResult(getRandomCharity(name, result?.name))
-   resultComp?.current?.scrollIntoView({ behavior: 'smooth' })  
+    const newResult = await getRandomCharity(name, result?.name)
+    setResult(newResult)
+  }
+
+  const handleRefresh = () => {
+    const suggestedCategory = CATEGORIES[Math.floor(Math.random()*CATEGORIES.length)]
+
+    handleSelect(suggestedCategory)
   }
 
   const toggleModal = () => {
     setIsOpen(!modalIsOpen)
   }
+
+  useEffect(() => {
+    if (resultComp.current) {
+      resultComp?.current?.scrollIntoView({ behavior: 'smooth' })  
+    }
+}, [result]);
 
     return (
       <>
@@ -52,10 +65,11 @@ const CharityPage: React.FC = () => {
             <div style={{width: "100%"}}>
               <h4 style={{ textAlign: 'center'}}>Choose where to donate</h4>
               <CardContainer>
-                <ChoosingCard name={CharityCategory.animals} onClick={handleSelect} selected={result?.category.includes(CharityCategory.animals)}/>
-                <ChoosingCard name={CharityCategory.military} onClick={handleSelect} selected={result?.category.includes(CharityCategory.military)}/>
-                <ChoosingCard name={CharityCategory.humanitarian} onClick={handleSelect} selected={result?.category.includes(CharityCategory.humanitarian)}/>
-              </CardContainer>
+                <ChoosingCard name={CharityCategory.animals} onClick={handleSelect} selected={result?.category === CharityCategory.animals}/>
+                <ChoosingCard name={CharityCategory.military} onClick={handleSelect} selected={result?.category === CharityCategory.military}/>
+                <ChoosingCard name={CharityCategory.humanitarian} onClick={handleSelect} selected={result?.category === CharityCategory.humanitarian}/>
+                <ChoosingCard name={CharityCategory.mixed} onClick={handleSelect} selected={result?.category === CharityCategory.mixed}/>
+              </CardContainer> 
             </div>
             {result && (
               <ResultContainer ref={resultComp}>
@@ -64,7 +78,7 @@ const CharityPage: React.FC = () => {
                 <ResultRow>❓ {result.description}</ResultRow>
                 <ResultRow>💡 <a href={result.link}> Learn more</a></ResultRow>
                 {result.payment_link ? <ResultRow>💵 <a href={result.payment_link}> Donate here</a></ResultRow> : <ResultRow>{`💵 Paypal: ${result.paypal_address}`}</ResultRow>}
-                <RefreshLink onClick={() => handleSelect(result.category[0])}>Pick a new one</RefreshLink>
+                <RefreshLink onClick={handleRefresh}>Pick a new one</RefreshLink>
               </ResultContainer>
               )}
           </Content>
@@ -148,14 +162,9 @@ const Content = styled.div`
   flex-direction: column;
   margin-top: 32px;
   padding: 16px;
-  width: 100%;
 
   @media (min-width: 768px) {
     align-items: center;
-  }
-
-  @media (min-width: 1440px) {
-    width: 60%;
   }
 `
 
@@ -168,6 +177,7 @@ const CardContainer = styled.div`
   @media (max-width: 480px) {
     flex-wrap: wrap;
     flex-direction: column;
+    width: 100%;
   }
 `
 
@@ -178,6 +188,7 @@ const ResultContainer = styled.div`
   background-color: #484848;
   color: white;
   padding: 16px;
+  width: 90%;
 `
 
 const ResultRow = styled.span`
